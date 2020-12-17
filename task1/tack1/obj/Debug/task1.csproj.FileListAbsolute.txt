@@ -1,0 +1,7 @@
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\bin\Debug\tack1.exe.config
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\bin\Debug\tack1.exe
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\bin\Debug\tack1.pdb
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\obj\Debug\task1.csprojAssemblyReference.cache
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\obj\Debug\task1.csproj.CoreCompileInputs.cache
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\obj\Debug\tack1.exe
+C:\Users\Тим\Desktop\практика программирование\GIT\Algo\tack1\tack1\obj\Debug\tack1.pdb
