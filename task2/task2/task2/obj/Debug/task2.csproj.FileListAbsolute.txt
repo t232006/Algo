@@ -1,0 +1,7 @@
+D:\практика программирование\GIT\Algo\task2\task2\task2\bin\Debug\task2.exe.config
+D:\практика программирование\GIT\Algo\task2\task2\task2\bin\Debug\task2.exe
+D:\практика программирование\GIT\Algo\task2\task2\task2\bin\Debug\task2.pdb
+D:\практика программирование\GIT\Algo\task2\task2\task2\obj\Debug\task2.csprojAssemblyReference.cache
+D:\практика программирование\GIT\Algo\task2\task2\task2\obj\Debug\task2.csproj.CoreCompileInputs.cache
+D:\практика программирование\GIT\Algo\task2\task2\task2\obj\Debug\task2.exe
+D:\практика программирование\GIT\Algo\task2\task2\task2\obj\Debug\task2.pdb
