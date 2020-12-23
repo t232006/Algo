@@ -9,40 +9,33 @@ namespace task2
     
     class calk
     {
-        byte[] mas;
+        int[] mas;
         int begin; int end;
-        int dim;
-        public calk(int begin, int end)
-        {
-            this.begin = begin; this.end = end;
-            dim = end-begin;
-            mas = new byte[dim];
-        }
-        public void razm(int k)
-        {
-            if (k == 0) make(); else
-            for (byte i=1; i<=2; i++)
+        public calk(int begin, int end) 
             {
-                    mas[k-1] = i;
-                    razm(k - 1);
-            }
-        }
-        void printmas(int lim)
+                this.begin = begin; this.end = end;
+            } 
+        public int WithMas()
         {
-            for (int i=0; i<lim; i++)
-            Console.Write(mas[i]+" ");
-            Console.WriteLine();
-        }
-        void make()
-        {
-            int n = begin; int i;
-            for(i = 0; i < mas.Length; i++)
+            mas = new int[end+1]; int st;
+            mas[begin] = 1; 
+            mas[begin + 1] = 1;
+            if (begin % 2 != 0) { mas[begin + 2] = 1; st = 3; } else st = 2;
+            for (int i=begin+st; i<=end; i++)
             {
-                if (mas[i] == 1) n += 1; else n *= 2;
-                if (n >= end) break;
+                mas[i] = mas[i - 1];
+                if (i % 2 == 0)  mas[i]+= mas[i / 2]; 
             }
-            if (n == end) printmas(i+1);
+            return mas[end];
         }
-
+        public int f(int n)
+        {
+            if ((n == begin) || (n == begin + 1) || (n == begin + 2) && (begin % 2 != 0)) return 1;
+            else
+            if (n % 2 == 0)
+                return f(n / 2) + f(n - 1);
+            else
+                return f(n - 1);
+        }
     }
 }

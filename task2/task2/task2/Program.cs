@@ -16,8 +16,9 @@ namespace task2
             //Console.WriteLine(pow.NotRec(3, 9));
             //Console.WriteLine(pow.Rec(3, 9));
             //Console.WriteLine(pow.EvenProp(3, 9));
-            calk cal = new calk(3, 10);
-            cal.razm(10 - 3);
+            calk c = new calk(2, 10);
+            Console.WriteLine(c.WithMas());
+            Console.WriteLine(c.f(10));
             Console.ReadLine();
         }
     }
