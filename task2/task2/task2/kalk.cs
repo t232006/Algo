@@ -35,7 +35,7 @@ namespace task2
             if (n % 2 == 0)
                 return f(n / 2) + f(n - 1);
             else
-                return f(n - 1);
+                return f(n - 1);  
         }
     }
 }
