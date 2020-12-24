@@ -17,28 +17,39 @@ namespace task3
             b = (byte)(a - b);
             a = (byte)(a - b);
         }
-        public byte[] bubbleSortS(byte[] mas1)
+        public byte[] bubbleSortS(byte[] mas)
         {
-            byte[] mas = mas1;
             for (int i = mas.Length-1; i > 0; i--)
                 for (int j = mas.Length-1; j > 0; j--)
                     if (mas[j] < mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);
             return mas;
         }
-        public byte[] bubbleSortUp(byte[] mas1)
+        public byte[] bubbleSortUp(byte[] mas)
         {
-            byte[] mas = mas1;
             for (int i = mas.Length - 1; i > 0; i--)
-                for (int j = mas.Length - 1; j > mas.Length-i; j--)
+                for (int j = mas.Length - 1; j > mas.Length-i-1; j--)
                     if (mas[j] < mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);
             return mas;
         }
-        public byte[] Shaiker(byte[] mas1)
+        public byte[] Shaiker(byte[] mas)
         {
-            byte[] mas = mas1;
-            for (int i = 0; i > mas.Length; i++)
-                for (int j = 0; j > mas.Length; j++)
-                    if (mas[j] > mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);
+            bool grow = true; int j; int k=0; 
+            for (int i = 0; i < mas.Length; i++)
+                if (grow)
+                    {
+                        for (j = k; j < mas.Length-1-k; j++)
+                            if (mas[j] > mas[j + 1]) swap(ref mas[j], ref mas[j + 1]);
+                        grow = !grow;
+                        k++;
+                    }
+                else
+                    {
+                        for (j = mas.Length - 1-k; j > k-1; j--)
+                            if (mas[j] < mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);
+                        grow = !grow;
+                    }
+
+                        
             return mas;
         }
     }
