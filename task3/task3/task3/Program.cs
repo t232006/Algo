@@ -30,7 +30,7 @@ namespace task3
         {
             DateTime dt =DateTime.Now;
             //ToString(mas);
-            ToString(Sort((byte[])mas.Clone()));
+            Sort((byte[])mas.Clone());
             //ToString(mas);
             TimeSpan el = DateTime.Now - dt;
             return "Прошло миллисекунд: "+(el.TotalMilliseconds).ToString();
@@ -38,10 +38,14 @@ namespace task3
         
         static void Main(string[] args)
         {
-            createMas(15);
+            createMas(100000);
             bubleSort bs = new bubleSort();
 
-            ToString(mas);
+            
+            Console.WriteLine(TimeCounter(bs.bubbleSortS));
+            Console.WriteLine(TimeCounter(bs.bubbleSortUp));
+            Console.WriteLine(TimeCounter(bs.Shaiker));
+
             Console.WriteLine(TimeCounter(bs.bubbleSortS));
             Console.WriteLine(TimeCounter(bs.bubbleSortUp));
             Console.WriteLine(TimeCounter(bs.Shaiker));

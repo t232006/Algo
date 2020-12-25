@@ -33,20 +33,18 @@ namespace task3
         }
         public byte[] Shaiker(byte[] mas)
         {
-            bool grow = true; int j; int k=0; 
+            int j; int k=0; 
             for (int i = 0; i < mas.Length; i++)
-                if (grow)
+                if (i%2==0)
                     {
                         for (j = k; j < mas.Length-1-k; j++)
-                            if (mas[j] > mas[j + 1]) swap(ref mas[j], ref mas[j + 1]);
-                        grow = !grow;
+                            if (mas[j] > mas[j + 1]) swap(ref mas[j], ref mas[j + 1]);  
                         k++;
                     }
                 else
                     {
                         for (j = mas.Length - 1-k; j > k-1; j--)
-                            if (mas[j] < mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);
-                        grow = !grow;
+                            if (mas[j] < mas[j - 1]) swap(ref mas[j], ref mas[j - 1]);  
                     }
 
                         
