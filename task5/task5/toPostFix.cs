@@ -46,7 +46,7 @@ namespace task5
 
             }
             this.origin = origin;
-            Console.WriteLine(this.origin);
+            //Console.WriteLine(this.origin);
             implementation();
         finish:;
         }
@@ -71,37 +71,47 @@ namespace task5
         }
         void implementation()
         {
-            byte k = 0;
+            bool exit = false; bool prevletter = false;
             action1(0);
-            while (k < origin.Length)
+            while (!exit)
             {
-                char cur = origin[k];
-                if (!symbols.Contains(cur)) action0(k);
+                char cur = origin[0];
+                if (!symbols.Contains(cur)) 
+                { 
+                    action0(0); 
+                    prevletter = true; 
+                }
                 else
                 {
+                    if (prevletter)  // inserts separator
+                    {
+                        prevletter = false;
+                        origin.Insert(0, '&');
+                        action0(0); 
+                    }
                     int a = symbols.IndexOf(Texas.Peek());
                     int b = symbols.IndexOf(cur);
                     switch (progr[a, b])
                     {
                         case 1:
-                            action1(k);
+                            action1(0);
                             break;
                         case 2:
                             action2();
                             break;
                         case 3:
-                            action3(k);
+                            action3(0);
                             break;
                         case 5:
                             Console.WriteLine("Ошибка! Проверь свою запись!");
-                            k++;
+                            exit = true;
                             break;
                         case 4:
                             Console.WriteLine(newstring);
-                            k++;
+                            exit = true;
                             break;
                     }
-                        
+
                 }
             }
         }
