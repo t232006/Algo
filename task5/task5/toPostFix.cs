@@ -11,6 +11,7 @@ namespace task5
         StringBuilder origin;
         StringBuilder newstring=new StringBuilder("");
         List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')'};
+        List<char> digits = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         //List<char> symbols1 = new List<char>() { '~', '+', '-', '*', '/', '('};
         byte[,] progr = new byte[7, 8] {
             { 4, 1, 1, 1, 1, 1, 1, 5 },
@@ -23,16 +24,22 @@ namespace task5
         };
 
         Stack<char> Texas=new Stack<char>();
-        public toPostFix(StringBuilder origin)
+        public toPostFix(StringBuilder or)
+        {
+            origin = or;
+            if (preparation()!=-1)
+            implementation(); 
+        }
+        sbyte preparation()  //-1 error
         {
             origin.Append('~');
             origin.Insert(0, '~');
             int i = 1;
-            if (origin[i] == '-') origin.Insert(1, '0'); i++;
-            while (i++ < origin.Length-1)
+            if (origin[i] == '-') { origin.Insert(1, '0'); i++; } else i = 1;
+            while (i++ < origin.Length - 1)
             {
                 if (origin[i] == '-')
-                    if (origin[i - 1] == '(')
+                    if ((origin[i - 1] == '(')||(origin[i - 1] == '/'))
                     {
                         origin.Insert(i, '0');
                         i += 2;
@@ -41,14 +48,16 @@ namespace task5
                     if (symbols.Contains(origin[i - 1]))
                     {
                         Console.WriteLine("Ошибка! Проверь свою запись!");
-                        goto finish;
+                        return -1;
                     }
-
+                if ((digits.Contains(origin[i])) &&
+                    (!digits.Contains(origin[i + 1])) &&
+                    (!symbols.Contains(origin[i + 1])))
+                { origin.Insert(i + 1, '*'); i++; };
             }
-            this.origin = origin;
-            //Console.WriteLine(this.origin);
-            implementation();
-        finish:;
+            Console.WriteLine(this.origin);
+            return 0;
+            
         }
         void action0(byte i)
         {
