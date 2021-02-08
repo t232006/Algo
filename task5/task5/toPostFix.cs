@@ -10,15 +10,16 @@ namespace task5
     {
         StringBuilder origin;
         StringBuilder newstring=new StringBuilder("");
-        List<char> symbols = new List<char>() {'~', '+', '-', '*', '/', '(', ')'};
+        List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')'};
         //List<char> symbols1 = new List<char>() { '~', '+', '-', '*', '/', '('};
-        byte[,] progr = new byte[6, 7] {
-            { 4, 1, 1, 1, 1, 1, 5 },
-            { 2, 1, 1, 1, 1, 1, 2 },
-            { 2, 1, 1, 1, 1, 1, 2 },
-            { 2, 2, 2, 2, 2, 1, 2 },
-            { 2, 2, 2, 2, 2, 1, 2 },
-            { 5, 1, 1, 1, 1, 1, 3 }
+        byte[,] progr = new byte[7, 8] {
+            { 4, 1, 1, 1, 1, 1, 1, 5 },
+            { 2, 1, 1, 1, 1, 1, 1, 2 },
+            { 2, 1, 1, 1, 1, 1, 1, 2 },
+            { 2, 2, 2, 2, 2, 1, 1, 2 },
+            { 2, 2, 2, 2, 2, 1, 1, 2 },
+            { 2, 2, 2, 2, 2, 2, 1, 2 },
+            { 5, 1, 1, 1, 1, 1, 1, 3 }
         };
 
         Stack<char> Texas=new Stack<char>();
