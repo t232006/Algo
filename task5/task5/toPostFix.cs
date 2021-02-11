@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace task5
 {
-    class toPostFix
+    class general
     {
-        StringBuilder origin;
-        StringBuilder newstring=new StringBuilder("");
-        List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')'};
-        List<char> digits = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+        protected List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')' };
+        protected List<char> digits = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ',' };
+        protected StringBuilder origin;
+    }
+    class toPostFix :general
+    {
+        public StringBuilder newstring=new StringBuilder("");
         //List<char> symbols1 = new List<char>() { '~', '+', '-', '*', '/', '('};
         byte[,] progr = new byte[7, 8] {
             { 4, 1, 1, 1, 1, 1, 1, 5 },
@@ -39,21 +42,32 @@ namespace task5
             while (i++ < origin.Length - 1)
             {
                 if (origin[i] == '-')
-                    if ((origin[i - 1] == '(')||(origin[i - 1] == '/'))
+                {
+                    if (origin[i - 1] == '/')
+                    {
+                        origin.Insert(i++, '('); //inserts () if /-x is met
+                        int j;
+                        for (j = i + 1; digits.Contains(origin[j]); j++);
+                        origin.Insert(j, ')');
+                    } 
+                    if (origin[i - 1] == '(')
                     {
                         origin.Insert(i, '0');
                         i += 2;
                     }
-                    else
+                        else
                     if (symbols.Contains(origin[i - 1]))
                     {
                         Console.WriteLine("Ошибка! Проверь свою запись!");
                         return -1;
                     }
-                if ((digits.Contains(origin[i])) &&
+                }
+                    
+                /*if ((digits.Contains(origin[i])) &&
                     (!digits.Contains(origin[i + 1])) &&
                     (!symbols.Contains(origin[i + 1])))
-                { origin.Insert(i + 1, '*'); i++; };
+                { origin.Insert(i + 1, '*'); i++; };*/
+                if (origin[i] == '.') origin[i] = ',';
             }
             Console.WriteLine(this.origin);
             return 0;

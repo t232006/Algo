@@ -12,6 +12,8 @@ namespace task5
         {
             StringBuilder s=new StringBuilder(Console.ReadLine());
             toPostFix tpf = new toPostFix(s);
+            calculator ca = new calculator(tpf.newstring);
+            Console.WriteLine(ca.parser());
             Console.ReadLine();
         }
     }
