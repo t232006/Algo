@@ -30,10 +30,23 @@ namespace task5
                 }
                 else
                 {
-                    Double a = calc.Pop();
-                    Double b = calc.Pop();
+                    Double a = calc.Pop(); Double b=0;
+                    if (calc.Count==1)
+                        b = calc.Pop(); // for functions
                     switch (origin[0])
                     {
+                        case 'c':
+                            calc.Push(Math.Cos(a));
+                            break;
+                        case 's':
+                            calc.Push(Math.Sin(a));
+                            break;
+                        case 't':
+                            calc.Push(Math.Tan(a));
+                            break;
+                        case 'g':
+                            calc.Push(1 / Math.Tan(a));
+                            break;
                         case '-':
                             calc.Push(b - a);
                             break;

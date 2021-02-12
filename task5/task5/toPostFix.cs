@@ -8,7 +8,7 @@ namespace task5
 {
     class general
     {
-        protected List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')' };
+        protected List<char> symbols = new List<char>() { '~', '+', '-', '*', '/', '^', '(', ')', 's', 'c', 't', 'g' };
         protected List<char> digits = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ',' };
         protected StringBuilder origin;
     }
@@ -16,14 +16,19 @@ namespace task5
     {
         public StringBuilder newstring=new StringBuilder("");
         //List<char> symbols1 = new List<char>() { '~', '+', '-', '*', '/', '('};
-        byte[,] progr = new byte[7, 8] {
-            { 4, 1, 1, 1, 1, 1, 1, 5 },
-            { 2, 1, 1, 1, 1, 1, 1, 2 },
-            { 2, 1, 1, 1, 1, 1, 1, 2 },
-            { 2, 2, 2, 2, 2, 1, 1, 2 },
-            { 2, 2, 2, 2, 2, 1, 1, 2 },
-            { 2, 2, 2, 2, 2, 2, 1, 2 },
-            { 5, 1, 1, 1, 1, 1, 1, 3 }
+        byte[,] progr = new byte[11, 12] {
+            //~  +  -  *  /  ^  (  )  s  c  t  g
+     /*~*/  { 4, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1 },
+     /*+*/  { 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 },
+     /*-*/  { 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 },
+     /***/  { 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2 },
+     /*/*/  { 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2 },
+     /*^*/  { 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
+     /*(*/  { 5, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1 },
+     /*s*/  { 2, 5, 5, 5, 5, 5, 1, 2, 1, 1, 1, 1 },
+     /*c*/  { 2, 5, 5, 5, 5, 5, 1, 2, 1, 1, 1, 1 },
+     /*t*/  { 2, 5, 5, 5, 5, 5, 1, 2, 1, 1, 1, 1 },
+     /*g*/  { 2, 5, 5, 5, 5, 5, 1, 2, 1, 1, 1, 1 }
         };
 
         Stack<char> Texas=new Stack<char>();
@@ -37,6 +42,10 @@ namespace task5
         {
             origin.Append('~');
             origin.Insert(0, '~');
+            origin.Replace("sin", "s");
+            origin.Replace("cos", "c");
+            origin.Replace("tg", "t");
+            origin.Replace("ctg", "g");
             int i = 1;
             if (origin[i] == '-') { origin.Insert(1, '0'); i++; } else i = 1;
             while (i++ < origin.Length - 1)
