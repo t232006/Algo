@@ -23,25 +23,53 @@ namespace labirint
             List<OneCell> getCand(OneCell current)
             {
                 List<OneCell> tempcand = new List<OneCell>();
-                if (current.X < cols - 1 && map[current.X + 2, current.Y].state == -1) tempcand.Add(map[current.X + 2, current.Y]);
-                if (current.X > 2 && map[current.X - 2, current.Y].state == -1) tempcand.Add(map[current.X - 2, current.Y]);
+                if (current.X < cols - 1 && map[current.X + 2, current.Y].state == 0) tempcand.Add(map[current.X + 2, current.Y]);
+                if (current.X > 2 && map[current.X - 2, current.Y].state == 0) tempcand.Add(map[current.X - 2, current.Y]);
                 
-                if (current.Y < rows - 1 && map[current.Y, current.Y + 2].state == -1) tempcand.Add(map[current.X, current.Y + 2]);
-                if (current.X < 2 && map[current.Y, current.Y - 2].state == -1) tempcand.Add(map[current.Y, current.Y - 2]);
+                if (current.Y < rows - 1 && map[current.Y, current.Y + 2].state == 0) tempcand.Add(map[current.X, current.Y + 2]);
+                if (current.X > 2 && map[current.Y, current.Y - 2].state == 0) tempcand.Add(map[current.Y, current.Y - 2]);
                 return tempcand;
             }
-            void DestroyWall (OneCell current)
+            void DestroyWall (OneCell current, short counter)
             {
                 OneCell cand;
                 Random step = new Random();
-                cand = getCand(current)[step.Next(4)];
-                if (current.X == cand.X)
-                    if (current.Y > cand.Y) map[current.X, current.Y - 1].state = 0; else
-                                            map[current.X, current.Y + 1].state = 0;
-                else
-                    if (current.X > cand.X) map[current.X - 1, current.Y].state = 0;
-                                            map[current.X + 1, current.Y].state = 0;
+                List<OneCell> tempcand = getCand(current);
+                if (tempcand.Count != 0)
+                {
+                    cand = tempcand[step.Next(tempcand.Count)];
+                    if (current.X == cand.X)
+                        if (current.Y > cand.Y)
+                        {
+                            map[current.X, current.Y - 1].state = counter;
+                            //DestroyWall(map[current.X, current.Y - 1], counter++);
+                        }
+                        else
+                        {
+                            map[current.X, current.Y + 1].state = counter;
+                            //DestroyWall(map[current.X, current.Y + 1], counter++);
+                        }
 
+                    else
+                        if (current.X > cand.X) 
+                        { 
+                            map[current.X - 1, current.Y].state = counter;
+                            //DestroyWall(map[current.X - 1, current.Y], counter++);
+                        }
+                        else 
+                        {
+                            map[current.X + 1, current.Y].state = counter;
+                            //DestroyWall(map[current.X + 1, current.Y], counter++);
+                        }
+                    DestroyWall(cand, counter++);
+                }  
+            }
+            public Tmap(short X_,short Y_)
+            {
+                OneCell OC;
+                OC.X = X_; OC.Y = Y_; OC.state = 0;
+                InitMap();
+                DestroyWall(OC,1);
             }
 
             public void printMap()
@@ -56,10 +84,10 @@ namespace labirint
                 }
                 Console.ReadKey();
             }
-            public void InitMap()
+            void InitMap()
             {
-                for (short i = 0; i < cells; i++)
-                for (short j = 0; j < columns; j++)
+                for (short i = 0; i < rows; i++)
+                for (short j = 0; j < cols; j++)
                     {
                         map[i, j].X = i; 
                         map[i, j].Y = j;
@@ -73,8 +101,8 @@ namespace labirint
        
         static void Main(string[] args)
         {
-            Tmap map1 = new Tmap();
-            map1.InitMap(); map1.printMap(); 
+            Tmap map1 = new Tmap(1,1);
+            map1.printMap(); 
         }
     }
 }
