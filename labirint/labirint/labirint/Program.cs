@@ -10,15 +10,16 @@ namespace labirint
     {
         class Tmap
         {
+            Random step = new Random();
             public struct OneCell
             {
                 public short X;
                 public short Y;
                 public short state;
             }
-            static byte rows = 7;
-            static byte cols = 7;
-            public OneCell[,] map = new OneCell[rows, cols];
+            static byte rows = 9;
+            static byte cols = 45;
+            public OneCell[,] map = new OneCell[cols, rows];
             List<OneCell> candidat = new List<OneCell>();
             List<OneCell> getCand(OneCell current)
             {
@@ -33,7 +34,7 @@ namespace labirint
             void DestroyWall (OneCell current, short counter)
             {
                 OneCell cand;
-                Random step = new Random();
+                
                 List<OneCell> tempcand = getCand(current);
                 if (tempcand.Count != 0)
                 {
@@ -57,9 +58,10 @@ namespace labirint
             }
             public void printMap()
             {
-                for (int i=0; i<rows; i++)
+                Console.WriteLine();
+                for (int j=0; j<rows; j++)
                 {
-                    for (int j = 0; j < cols; j++)
+                    for (int i = 0; i < cols; i++)
                         if (map[i, j].state == -1)
                             Console.Write('█');
                         else Console.Write(' ');
@@ -69,8 +71,8 @@ namespace labirint
             }
             void InitMap()
             {
-                for (short i = 0; i < rows; i++)
-                for (short j = 0; j < cols; j++)
+                for (short i = 0; i < cols; i++)
+                for (short j = 0; j < rows; j++)
                     {
                         map[i, j].X = i; 
                         map[i, j].Y = j;
