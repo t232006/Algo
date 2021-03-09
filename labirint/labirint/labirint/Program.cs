@@ -17,8 +17,8 @@ namespace labirint
                 public short Y;
                 public short state;
             }
-            static byte rows = 9;
-            static byte cols = 45;
+            static byte rows = 19;
+            static byte cols = 49;
             public OneCell[,] map = new OneCell[cols, rows];
             List<OneCell> candidat = new List<OneCell>();
             List<OneCell> getCand(OneCell current)
@@ -36,17 +36,24 @@ namespace labirint
                 OneCell cand;
                 
                 List<OneCell> tempcand = getCand(current);
-                if (tempcand.Count != 0)
+                map[current.X, current.Y].state = counter++;
+                while (tempcand.Count != 0)
                 {
                     cand = tempcand[step.Next(tempcand.Count)];
-                    map[current.X,current.Y].state = counter++;
-                    if (current.X == cand.X)
-                        if (current.Y > cand.Y) map[current.X, current.Y - 1].state = counter; else 
-                                                map[current.X, current.Y + 1].state = counter;
-                    else
-                        if (current.X > cand.X) map[current.X - 1, current.Y].state = counter; else
-                                                map[current.X + 1, current.Y].state = counter;
-                    DestroyWall(cand, ++counter);
+                    tempcand.Remove(cand);
+                    if (map[cand.X,cand.Y].state == 0)
+                    {
+                        if (current.X == cand.X)
+                            if (current.Y > cand.Y) map[current.X, current.Y - 1].state = counter;
+                            else
+                                map[current.X, current.Y + 1].state = counter;
+                        else
+                                                if (current.X > cand.X) map[current.X - 1, current.Y].state = counter;
+                        else
+                            map[current.X + 1, current.Y].state = counter;
+                        DestroyWall(cand, ++counter);
+                    }
+                    
                 }  
             }
             public Tmap(short X_,short Y_)
@@ -58,7 +65,6 @@ namespace labirint
             }
             public void printMap()
             {
-                Console.WriteLine();
                 for (int j=0; j<rows; j++)
                 {
                     for (int i = 0; i < cols; i++)
