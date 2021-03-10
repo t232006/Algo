@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,20 @@ namespace labirint
                 }
                 Console.ReadKey();
             }
+            public void SaveMap(string filename)
+            {
+                filename = "map\\" + filename + ' ' + cols + 'X' + rows + ".txt";
+                StreamWriter f = new StreamWriter(filename);
+                for (int j = 0; j < rows; j++)
+                {
+                    for (int i = 0; i < cols; i++)
+                        if (map[i, j].state == -1)
+                            f.Write('█');
+                        else f.Write(' ');
+                    f.WriteLine();
+                }
+                f.Close();
+            }
             void InitMap()
             {
                 for (short i = 0; i < cols; i++)
@@ -91,7 +106,12 @@ namespace labirint
         static void Main(string[] args)
         {
             Tmap map1 = new Tmap(1,1);
-            map1.printMap(); 
+            map1.printMap();
+            Console.WriteLine("Сохранить?\n y - да\n n - нет");
+            Char c = Console.ReadKey().KeyChar;
+            if (c == 'y') Console.WriteLine("Введите имя файла");
+            string filename_=Console.ReadLine();
+            map1.SaveMap(filename_);
         }
     }
 }
