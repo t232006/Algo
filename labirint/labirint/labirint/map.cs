@@ -40,7 +40,17 @@ namespace labirint
         public void LoadMap(string filename)
         {
             StreamReader f = new StreamReader(filename);
-            byte i = 0; byte j = 0; string s="";
+            byte i = 1; string s=f.ReadLine();
+            do 
+            { 
+                i++;
+                s=f.ReadLine();
+            } 
+            while (!f.EndOfStream);
+            rows = i; cols = (byte)s.Length;
+            map = new OneCell[cols, rows];
+            f = new StreamReader(filename);
+            byte j = 0;
             do
             {
                 s = f.ReadLine();
@@ -49,8 +59,8 @@ namespace labirint
                     else map[i, j].state = 0;
                 j++;
             }
-            while (f.EndOfStream);
-            rows = i; cols = j;
+            while (!f.EndOfStream);
+            f.Close();
         }
         public void printMap()
         {
@@ -119,6 +129,7 @@ namespace labirint
         }        
         void InitMap()
         {
+            map = new OneCell[cols, rows];
             for (short i = 0; i < cols; i++)
                 for (short j = 0; j < rows; j++)
                 {
