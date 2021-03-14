@@ -14,10 +14,11 @@ namespace labirint
             public short X;
             public short Y;
             public short state;
+            public bool wall;
         }
-        protected byte rows;
-        protected byte cols;
-        protected OneCell[,] map;
+        internal byte rows;
+        internal byte cols;
+        internal OneCell[,] map;
        /* public Tmap(byte r, byte c)
         {
             
@@ -48,6 +49,26 @@ namespace labirint
                 Console.WriteLine();
             }
             Console.ReadKey();
+        }
+        protected void InitMap()
+        {
+            map = new OneCell[cols, rows];
+            for (short i = 0; i < cols; i++)
+                for (short j = 0; j < rows; j++)
+                {
+                    map[i, j].X = i;
+                    map[i, j].Y = j;
+                    if ((i % 2 != 0) && (j % 2 != 0))
+                    {
+                        map[i, j].state = 0;
+                        map[i, j].wall = false;
+                    }
+                    else
+                    {
+                        map[i, j].state = -1;
+                        map[i, j].wall = true;
+                    }
+                }
         }
     }
     #region Creator
@@ -104,19 +125,6 @@ namespace labirint
             OneCell OC = map[X_, Y_];
             DestroyWall(OC, 1);
         }        
-        void InitMap()
-        {
-            map = new OneCell[cols, rows];
-            for (short i = 0; i < cols; i++)
-                for (short j = 0; j < rows; j++)
-                {
-                    map[i, j].X = i;
-                    map[i, j].Y = j;
-                    if ((i % 2 != 0) && (j % 2 != 0))
-                        map[i, j].state = 0;
-                    else map[i, j].state = -1;
-                }
-        }
     }
     #endregion
 }

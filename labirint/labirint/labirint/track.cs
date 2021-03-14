@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace labirint
 {
-    class track:Tmap
+    class Ttrack:Tmap
     {
         public void LoadMap(string filename)
         {
@@ -33,6 +33,25 @@ namespace labirint
             }
             while (!f.EndOfStream);
             f.Close();
+        }
+        public Ttrack(TCreator m)
+        {
+            map = m.map;
+            rows = m.rows; cols = m.cols;
+            for (int i=0; i<rows; i++)
+                for (int j=0; j<cols; j++)
+                {
+                    if (map[j, i].state == -1) map[j, i].wall = true;
+                    else
+                    {
+                        map[j, i].wall = false;
+                        map[j, i].state = 0;
+                    }
+                }
+        }
+        public Ttrack(string filename)
+        {
+            LoadMap(filename);
         }
 
     }

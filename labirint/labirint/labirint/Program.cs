@@ -21,7 +21,9 @@ namespace labirint
             #endregion
             cre1.SaveMap(filename_);*/
             //cre1.LoadMap("map\\проба 49X19.txt");
-            cre1.printMap();
+            //Ttrack track = new Ttrack("map\\проба 49X19.txt");
+            Ttrack track = new Ttrack(cre1);
+            track.printMap();
         }
     }
 }
