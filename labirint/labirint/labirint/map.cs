@@ -18,11 +18,10 @@ namespace labirint
         protected byte rows;
         protected byte cols;
         protected OneCell[,] map;
-        public Tmap(byte r, byte c)
+       /* public Tmap(byte r, byte c)
         {
-            rows = r; cols = c;
-            OneCell[,] map = new OneCell[cols, rows];
-        }
+            
+        }*/
         public void SaveMap(string filename)
         {
             filename = "map\\" + filename + ' ' + cols + 'X' + rows + ".txt";
@@ -37,31 +36,7 @@ namespace labirint
             }
             f.Close();
         }
-        public void LoadMap(string filename)
-        {
-            StreamReader f = new StreamReader(filename);
-            byte i = 1; string s=f.ReadLine();
-            do 
-            { 
-                i++;
-                s=f.ReadLine();
-            } 
-            while (!f.EndOfStream);
-            rows = i; cols = (byte)s.Length;
-            map = new OneCell[cols, rows];
-            f = new StreamReader(filename);
-            byte j = 0;
-            do
-            {
-                s = f.ReadLine();
-                for (i = 0; i < s.Length; i++)
-                    if (s[i] == '█') map[i, j].state = -1;
-                    else map[i, j].state = 0;
-                j++;
-            }
-            while (!f.EndOfStream);
-            f.Close();
-        }
+        
         public void printMap()
         {
             for (int j = 0; j < rows; j++)
@@ -120,8 +95,10 @@ namespace labirint
 
             }
         }
-        public TCreator(byte r, byte c, short X_, short Y_):base(r,c)
+        public TCreator(byte r, byte c, short X_, short Y_)//:base(r,c)
         {
+            rows = r; cols = c;
+            //OneCell[,] map = new OneCell[cols, rows];
             InitMap();
             //map[X_, Y_].state = 1;
             OneCell OC = map[X_, Y_];
