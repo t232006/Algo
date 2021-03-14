@@ -45,7 +45,7 @@ namespace labirint
                 for (int i = 0; i < cols; i++)
                     if (map[i, j].state == -1)
                         Console.Write('█');
-                    else Console.Write(' ');
+                    else Console.Write(map[i,j].state);
                 Console.WriteLine();
             }
             Console.ReadKey();

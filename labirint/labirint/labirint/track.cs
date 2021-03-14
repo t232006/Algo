@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,47 @@ namespace labirint
         public Ttrack(string filename)
         {
             LoadMap(filename);
+        }
+        public void CreateTrack(Point p, Point goal)
+        {
+            Stack<Point> st = new Stack<Point>();
+            if (!(p==goal))
+            {
+                if (map[p.X+1, p.Y].state == 0)
+                {
+                    Point p1 = new Point(p.X + 1, p.Y);
+                    st.Push(p1);
+                    map[p1.X , p1.Y].state = ++map[p.X, p.Y].state;
+                    CreateTrack(st.Peek(),goal);
+                }
+                else
+                if (map[p.X, p.Y+1].state == 0)
+                {
+                    Point p1 = new Point(p.X, p.Y+1);
+                    st.Push(p1);
+                    map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
+                    CreateTrack(st.Peek(), goal);
+                }
+                else
+                if (map[p.X - 1, p.Y].state == 0)
+                {
+                    Point p1 = new Point(p.X - 1, p.Y);
+                    st.Push(p1);
+                    map[p1.X, p1.Y].state =++map[p.X, p.Y].state;
+                    CreateTrack(st.Peek(), goal);
+                }
+                else
+                if (map[p.X, p.Y-1].state == 0)
+                {
+                    Point p1 = new Point(p.X, p.Y-1);
+                    st.Push(p1);
+                    map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
+                    CreateTrack(st.Peek(), goal);
+                } 
+                else if (st.Count!=0) CreateTrack(st.Pop(), goal);
+                
+            }
+            
         }
 
     }
