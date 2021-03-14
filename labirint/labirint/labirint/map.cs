@@ -45,7 +45,14 @@ namespace labirint
                 for (int i = 0; i < cols; i++)
                     if (map[i, j].state == -1)
                         Console.Write('█');
-                    else Console.Write(map[i,j].state);
+                    else
+                    if (map[i, j].state > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write('°');
+                        Console.ResetColor();
+                    }
+                    else Console.Write(' ');
                 Console.WriteLine();
             }
             Console.ReadKey();
