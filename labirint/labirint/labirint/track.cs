@@ -54,9 +54,16 @@ namespace labirint
         {
             LoadMap(filename);
         }
-        public void CreateTrack(Point p, Point goal)
+        public void PCreateTrack(Point p, Point goal)
+        {
+            map[p.X, p.Y].symbol = 'S';
+            map[goal.X, goal.Y].symbol = 'F';
+            CreateTrack(p, goal);
+        }
+        void CreateTrack(Point p, Point goal)
         {
             Stack<Point> st = new Stack<Point>();
+            
             if (!(p==goal))
             {
                 if (map[p.X+1, p.Y].state == 0)

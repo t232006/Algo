@@ -15,6 +15,7 @@ namespace labirint
             public short Y;
             public short state;
             public bool wall;
+            public char symbol;
         }
         internal byte rows;
         internal byte cols;
@@ -25,14 +26,13 @@ namespace labirint
         }*/
         public void SaveMap(string filename)
         {
+            TransferMap();
             filename = "map\\" + filename + ' ' + cols + 'X' + rows + ".txt";
             StreamWriter f = new StreamWriter(filename);
             for (int j = 0; j < rows; j++)
             {
                 for (int i = 0; i < cols; i++)
-                    if (map[i, j].state == -1)
-                        f.Write('█');
-                    else f.Write(' ');
+                    f.Write(map[i, j].symbol);
                 f.WriteLine();
             }
             f.Close();
@@ -40,19 +40,19 @@ namespace labirint
         
         public void printMap()
         {
+            TransferMap();
             for (int j = 0; j < rows; j++)
             {
                 for (int i = 0; i < cols; i++)
-                    if (map[i, j].state == -1)
-                        Console.Write('█');
-                    else
-                    if (map[i, j].state > 0)
+                {
+                    if (map[i,j].symbol== '°')
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write('°');
+                        Console.Write(map[i, j].symbol);
                         Console.ResetColor();
-                    }
-                    else Console.Write(' ');
+                    } else
+                    Console.Write(map[i, j].symbol);
+                }
                 Console.WriteLine();
             }
             Console.ReadKey();
@@ -76,6 +76,22 @@ namespace labirint
                         map[i, j].wall = true;
                     }
                 }
+        }
+        protected void TransferMap()
+        {
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    if (map[j, i].symbol==0)
+                    if (map[j, i].state==-1) map[j, i].symbol = '█';
+                    else
+                        if (map[j, i].state == 0)
+                        map[j, i].symbol = ' ';
+                    else
+                        map[j, i].symbol = '°';
+
+
+
+
         }
     }
     #region Creator
