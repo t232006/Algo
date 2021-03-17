@@ -54,52 +54,53 @@ namespace labirint
         {
             LoadMap(filename);
         }
-        public void PCreateTrack(Point p, Point goal)
-        {
-            map[p.X, p.Y].symbol = 'S';
-            map[goal.X, goal.Y].symbol = 'F';
-            CreateTrack(p, goal);
-        }
-        void CreateTrack(Point p, Point goal)
+        public void CreateTrack(Point p, Point goal)
         {
             Stack<Point> st = new Stack<Point>();
-            
-            if (!(p==goal))
+            st.Push(p); st.Push(p); st.Push(p); st.Push(p);
+            map[p.X, p.Y].symbol = 'S';
+            map[goal.X, goal.Y].symbol = 'F';
+            while ((p != goal)&&(st.Count!=0))
             {
-                if (map[p.X+1, p.Y].state == 0)
+                    Point p1;
+                if (map[p.X + 1, p.Y].state == 0)
                 {
-                    Point p1 = new Point(p.X + 1, p.Y);
-                    st.Push(p1);
-                    map[p1.X , p1.Y].state = ++map[p.X, p.Y].state;
-                    CreateTrack(st.Peek(),goal);
-                }
-                else
-                if (map[p.X, p.Y+1].state == 0)
-                {
-                    Point p1 = new Point(p.X, p.Y+1);
+                    p1 = new Point(p.X + 1, p.Y);
                     st.Push(p1);
                     map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
-                    CreateTrack(st.Peek(), goal);
+                    //CreateTrack(st.Peek(),goal);
+
+                }
+                else
+                if (map[p.X, p.Y + 1].state == 0)
+                {
+                    p1 = new Point(p.X, p.Y + 1);
+                    st.Push(p1);
+                    map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
+                    //CreateTrack(st.Peek(), goal);
                 }
                 else
                 if (map[p.X - 1, p.Y].state == 0)
                 {
-                    Point p1 = new Point(p.X - 1, p.Y);
-                    st.Push(p1);
-                    map[p1.X, p1.Y].state =++map[p.X, p.Y].state;
-                    CreateTrack(st.Peek(), goal);
-                }
-                else
-                if (map[p.X, p.Y-1].state == 0)
-                {
-                    Point p1 = new Point(p.X, p.Y-1);
+                    p1 = new Point(p.X - 1, p.Y);
                     st.Push(p1);
                     map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
-                    CreateTrack(st.Peek(), goal);
+                    //CreateTrack(st.Peek(), goal);
+                }
+                else
+                if (map[p.X, p.Y - 1].state == 0)
+                {
+                    p1 = new Point(p.X, p.Y - 1);
+                    st.Push(p1);
+                    map[p1.X, p1.Y].state = ++map[p.X, p.Y].state;
+                    //CreateTrack(st.Peek(), goal);
+                }
+                else p1 = st.Pop();
+                    //else if (st.Count!=0) CreateTrack(st.Pop(), goal);
+                p = p1;
+                //Console.WriteLine(p);
+
                 } 
-                else if (st.Count!=0) CreateTrack(st.Pop(), goal);
-                
-            }
             
         }
 
