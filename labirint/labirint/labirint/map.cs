@@ -81,13 +81,13 @@ namespace labirint
         {
             for (int i = 0; i < rows; i++)
                 for (int j = 0; j < cols; j++)
-                    if (map[j, i].symbol==0)
+                    if (map[j, i].symbol==0) //if there is no symbols
                     if (map[j, i].state==-1) map[j, i].symbol = '█';
                     else
-                        if (map[j, i].state == 0)
+                        //if (map[j, i].state >= 0)
                         map[j, i].symbol = ' ';
-                    else
-                        map[j, i].symbol = '°';
+                    /*else
+                        map[j, i].symbol = '°';*/
 
 
 
